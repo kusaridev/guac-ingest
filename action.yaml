@@ -1,0 +1,19 @@
+---  
+name: 'GUAC Ingest'
+description: 'Ingest files into GUAC'
+inputs: 
+  files:  
+    description: 'path to directory or specific file to ingest'
+    required: true
+  gql-addr: 
+    description: 'endpoint for graphql api for GUAC'
+    requited: true
+outputs:
+  console_out:
+    description: 'raw console output from guacone command'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.files }}
+    - ${{ inputs.gql-addr }}
