@@ -1,0 +1,17 @@
+on: [push]
+
+jobs:
+  test_job:
+    runs-on: ubuntu-latest
+    name: Test job for guac ingestion through GHA
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: GUAC ingestion
+        uses: ./
+        id: guacone
+        with:
+          files: './spdx.json'
+          gql-addr: 'http://localhost:1234/query'
+      - name: Output
+        run: echo "${{steps.guacone.outputs}}"
