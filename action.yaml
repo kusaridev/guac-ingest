@@ -1,12 +1,18 @@
----  
+---
 name: 'GUAC Ingest'
 description: 'Ingest files into GUAC'
-inputs: 
-  files:  
+inputs:
+  files:
     description: 'path to directory or specific file to ingest'
     required: true
-  gql-addr: 
+  gql-addr:
     description: 'endpoint for graphql api for GUAC'
+    requited: true
+  token-url:
+    description: 'url for auth token provider'
+    requited: true
+  client-id:
+    description: 'client id for auth token provider'
     requited: true
 outputs:
   console_out:
@@ -17,3 +23,5 @@ runs:
   args:
     - ${{ inputs.files }}
     - ${{ inputs.gql-addr }}
+    - ${{ inputs.token-url }}
+    - ${{ inputs.client-id }}
