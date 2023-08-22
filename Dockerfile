@@ -1,5 +1,7 @@
-FROM ghcr.io/guacsec/guac:v0.1.1
+FROM cgr.dev/chainguard/go AS builder
+COPY . /app
+RUN cd /app && go build -o guac-github-action .
 
-COPY entrypoint.sh /entrypoint.sh
-
-ENTRYPOINT ["/entrypoint.sh"]
+FROM cgr.dev/chainguard/glibc-dynamic
+COPY --from=builder /app/guac-github-action /usr/bin/
+ENTRYPOINT ["/usr/bin/guac-github-action"]

@@ -1,5 +1,9 @@
 on: [push]
 
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   test_job:
     runs-on: ubuntu-latest
@@ -12,6 +16,8 @@ jobs:
         id: guacone
         with:
           files: './spdx.json'
-          gql-addr: 'http://localhost:1234/query'
+          gql-addr: ${{ secrets.GQLADDR }}
+          token-url: ${{ secrets.TOKENURL }}
+          client-id: ${{ secrets.CLIENTID }}
       - name: Output
         run: echo "${{steps.guacone.outputs}}"
