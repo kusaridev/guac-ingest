@@ -1,6 +1,9 @@
 ---
 name: 'GUAC Ingest'
 description: 'Ingest files into GUAC'
+branding:
+  icon: "shield"
+  color: "purple"
 author: 'Kusari'
 inputs:
   files:
