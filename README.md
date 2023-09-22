@@ -1,6 +1,6 @@
 # GUAC action
 
-Github Action for ingesting SBOMs and Attestations into
+This Action ingests SBOMs and Attestations into
 [GUAC](https://github.com/guacsec/guac) as part of your github
 workflow. Authentication is provided by GitHub's OIDC provider and a specified
 auth token provider. This will enable quick and easy integration to your GUAC
@@ -8,8 +8,7 @@ instance with very minimal input.
 
 For details on how to query and utilize the data upon ingestion, please see documentataion for the [GUAC use cases](https://docs.guac.sh/guac-use-cases/). 
 
-
-This action will only work with an OAuth2 protected GUAC GraphQL API endpoint - e.g. The Kusari hosted GUAC platform.
+This action will only work with an OAuth2 protected GUAC GraphQL API endpoint - e.g. [The Kusari hosted GUAC platform](https://www.kusari.dev/).  
 
 ## Usage
 
