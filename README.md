@@ -1,10 +1,34 @@
-# Overview
+# GUAC action
 
 Github Action for ingesting SBOMs and Attestations into
 [GUAC](https://github.com/guacsec/guac) as part of your github
 workflow. Authentication is provided by GitHub's OIDC provider and a specified
 auth token provider. This will enable quick and easy integration to your GUAC
 instance with very minimal input.
+
+For details on how to query and utilize the data upon ingestion, please see documentataion for the [GUAC use cases](https://docs.guac.sh/guac-use-cases/). 
+
+
+This action will only work with an OAuth2 protected GUAC GraphQL API endpoint - e.g. The Kusari hosted GUAC platform.
+
+## Usage
+
+See [action.yaml](action.yaml)
+
+```yaml
+steps:
+  - uses: actions/checkout@v3
+
+  - uses: [Your build and SBOM/Provenance generation steps]
+
+  - uses: kusaridev/gua-action@v0
+    name: GUAC ingestion
+    with:
+      files: './spdx.json'
+      gql-addr: 'https://[tenant-id].api.kusari.cloud/query'
+      token-url: ${{ secrets.TOKENURL }}
+      client-id: ${{ secrets.CLIENTID }}
+```
 
 ## Inputs
 
@@ -30,14 +54,6 @@ instance with very minimal input.
 
 Raw output of the guacone command
 
-## Example Usage
+# License
 
-```yaml
-    - name: GUAC ingestion
-      uses: kusaridev/guac-github-action@v1
-      with:
-        files: './spdx.json'
-        gql-addr: 'https://guac.kusari.dev/query'
-        token-url: ${{ secrets.TOKENURL }}
-        client-id: ${{ secrets.CLIENTID }}
-```
+The scripts and documentation in this project are released under the [Apache License](LICENSE)

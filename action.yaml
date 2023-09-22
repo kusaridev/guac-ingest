@@ -1,6 +1,7 @@
 ---
 name: 'GUAC Ingest'
 description: 'Ingest files into GUAC'
+author: 'Kusari'
 inputs:
   files:
     description: 'path to directory or specific file to ingest'
