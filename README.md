@@ -20,7 +20,7 @@ steps:
 
   - uses: [Your build and SBOM/Provenance generation steps]
 
-  - uses: kusaridev/gua-action@v0
+  - uses: kusaridev/guac-ingest@v0
     name: GUAC ingestion
     with:
       files: './spdx.json'
