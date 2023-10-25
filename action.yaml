@@ -11,13 +11,17 @@ inputs:
     required: true
   gql-addr:
     description: 'endpoint for graphql api for GUAC'
-    requited: true
+    required: true
   token-url:
     description: 'url for auth token provider'
-    requited: true
+    required: true
   client-id:
     description: 'client id for auth token provider'
-    requited: true
+    required: true
+  client-secret:
+    description: 'client secret for auth token provider'
+    required: false
+    default: ''
 outputs:
   console_out:
     description: 'raw console output from guacone command'
@@ -29,3 +33,4 @@ runs:
     - ${{ inputs.gql-addr }}
     - ${{ inputs.token-url }}
     - ${{ inputs.client-id }}
+    - ${{ inputs.client-secret }}
