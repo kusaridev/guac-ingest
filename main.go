@@ -19,6 +19,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"net/url"
 	"os"
 	"time"
 
@@ -36,15 +37,16 @@ import (
 )
 
 // This program grabs an OIDC ID token from GitHub and then exhcanges it for an
-// Auth token from the passed in URL. Then it uses GUAC collectors to process
-// files and push them to a GUAC gql server. It is only meant to be run by a
-// GitHub Action (see action.yaml) and therefore has limited options and
-// argument processing.
+// Auth token from the passed in URL. In case a client secret is provided, it'd
+// use that and perform client_credentials flow instead.
+// Then it uses GUAC collectors to process files and push them to a GUAC gql
+// server. It is only meant to be run by a GitHub Action (see action.yaml)
+// and therefore has limited options and argument processing.
 func main() {
 	ctx := logging.WithLogger(context.Background())
 	logger := logging.FromContext(ctx)
 
-	if len(os.Args) != 5 {
+	if len(os.Args) != 6 {
 		logger.Fatalf("Invalid args")
 	}
 
@@ -52,8 +54,9 @@ func main() {
 	gqlEP := os.Args[2]
 	tokenURL := os.Args[3]
 	clientID := os.Args[4]
+	clientSecret := os.Args[5]
 
-	token, err := authToken(ctx, tokenURL, clientID)
+	token, err := authToken(ctx, tokenURL, clientID, clientSecret, gqlEP)
 	if err != nil {
 		logger.Fatalf("Unable to get auth token: %v", err)
 	}
@@ -70,7 +73,7 @@ func main() {
 	}
 }
 
-func authToken(ctx context.Context, tokenURL, clientID string) (*oauth2.Token, error) {
+func authToken(ctx context.Context, tokenURL, clientID string, clientSecret string, gqlEP string) (*oauth2.Token, error) {
 	logger := logging.FromContext(ctx)
 	if !providers.Enabled(ctx) {
 		return nil, fmt.Errorf("incorrect environment")
@@ -84,14 +87,22 @@ func authToken(ctx context.Context, tokenURL, clientID string) (*oauth2.Token, e
 	}
 	logger.Infof("ID token aquired")
 
+	gqlUrl, err := url.Parse(gqlEP)
+	if err != nil {
+		return nil, fmt.Errorf("unable to parse audience from gql-addr")
+	}
+	audience := fmt.Sprintf("%v://%v", gqlUrl.Scheme, gqlUrl.Hostname())
+
 	var conf oauth2.Config
 	conf.Endpoint.TokenURL = tokenURL
 	conf.Endpoint.AuthStyle = oauth2.AuthStyleInParams
 	options := []oauth2.AuthCodeOption{
 		oauth2.SetAuthURLParam("grant_type", "urn:ietf:params:oauth:grant-type:jwt-bearer"),
-		oauth2.SetAuthURLParam("assertion", token),
 		oauth2.SetAuthURLParam("scope", "openid"),
 		oauth2.SetAuthURLParam("client_id", clientID),
+		oauth2.SetAuthURLParam("client_secret", clientSecret),
+		oauth2.SetAuthURLParam("audience", audience),
+		oauth2.SetAuthURLParam("assertion", token),
 	}
 	tok, err := conf.Exchange(ctx, "", options...)
 	if err != nil {
