@@ -31,8 +31,8 @@ jobs:
           files: ./guac-data/docs
           client-id: ${{ secrets.GUAC_CLIENT_ID }}
           client-secret: ${{ secrets.GUAC_CLIENT_SECRET }}
-          tenant-api-endpoint: https://ingesttest.api.dev.kusari.cloud
-          auth-server-token-endpoint: https://auth.dev.kusari.cloud/oauth2/token
+          api-addr: https://ingesttest.api.dev.kusari.cloud
+          token-url: https://auth.dev.kusari.cloud/oauth2/token
 
       - name: last step
         shell: bash
