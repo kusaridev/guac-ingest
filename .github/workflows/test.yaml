@@ -1,0 +1,40 @@
+name: Build and Test
+
+on:
+  workflow_dispatch:
+  push:
+    # branches:
+    #   - main
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@24cb9080177205b6e8c946b17badbe402adc938f # v3.4.0
+
+      - name: clone guac-data
+        uses: actions/checkout@24cb9080177205b6e8c946b17badbe402adc938f # v3.4.0
+        with:
+          repository: 'guacsec/guac-data'
+          ref: 'main'
+          path: 'guac-data'
+
+      - name: ingest to guac
+        uses: ./
+        continue-on-error: true
+        with:
+          files: ./guac-data/docs
+          client-id: ${{ secrets.GUAC_CLIENT_ID }}
+          client-secret: ${{ secrets.GUAC_CLIENT_SECRET }}
+          tenant-api-endpoint: https://ingesttest.api.dev.kusari.cloud
+          auth-server-token-endpoint: https://auth.dev.kusari.cloud/oauth2/token
+
+      - name: last step
+        shell: bash
+        run: |
+          echo "This runs after GUAC ingestion"

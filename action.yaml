@@ -9,7 +9,7 @@ inputs:
   files:
     description: 'path to directory or specific file to ingest'
     required: true
-  gql-addr:
+  api-addr:
     description: 'endpoint for graphql api for GUAC'
     required: true
   token-url:
@@ -30,7 +30,7 @@ runs:
   image: 'Dockerfile'
   args:
     - ${{ inputs.files }}
-    - ${{ inputs.gql-addr }}
-    - ${{ inputs.token-url }}
     - ${{ inputs.client-id }}
     - ${{ inputs.client-secret }}
+    - ${{ inputs.api-addr }}
+    - ${{ inputs.token-url }}
