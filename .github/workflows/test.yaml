@@ -28,8 +28,8 @@ jobs:
         uses: ./
         continue-on-error: true
         with:
-          # files: ./guac-data/docs
-          files: ./guac-data/top-dh-sboms
+          files: ./guac-data/docs
+          # files: ./guac-data/top-dh-sboms
           client-id: ${{ secrets.GUAC_CLIENT_ID }}
           client-secret: ${{ secrets.GUAC_CLIENT_SECRET }}
           api-addr: https://ingesttest.api.dev.kusari.cloud
