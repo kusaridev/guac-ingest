@@ -32,6 +32,10 @@ steps:
 
 **Required** - Path to directory or specific file to ingest
 
+### `api-addr`
+
+**Required** - Kusari hosted GUAC tenant api endpoint
+
 ### `client-id`
 
 **Required** - Client id for auth token provider
@@ -39,10 +43,6 @@ steps:
 ### `client-secret`
 
 **Required** - Client secret for auth token provider
-
-### `api-addr`
-
-**Required** - Kusari hosted GUAC tenant api endpoint
 
 ### `token-url`
 

@@ -9,14 +9,14 @@ inputs:
   files:
     description: 'Path to directory or specific file to ingest'
     required: true
+  api-addr:
+    description: 'Kusari hosted GUAC tenant api endpoint'
+    required: true
   client-id:
     description: 'Client id for auth token provider'
     required: true
   client-secret:
     description: 'Client secret for auth token provider'
-    required: true
-  api-addr:
-    description: 'Kusari hosted GUAC tenant api endpoint'
     required: true
   token-url:
     description: 'Url for auth token provider'
