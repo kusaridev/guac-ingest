@@ -7,24 +7,24 @@ branding:
 author: 'Kusari'
 inputs:
   files:
-    description: 'path to directory or specific file to ingest'
-    required: true
-  api-addr:
-    description: 'endpoint for graphql api for GUAC'
-    required: true
-  token-url:
-    description: 'url for auth token provider'
+    description: 'Path to directory or specific file to ingest'
     required: true
   client-id:
-    description: 'client id for auth token provider'
+    description: 'Client id for auth token provider'
     required: true
   client-secret:
-    description: 'client secret for auth token provider'
-    required: false
-    default: ''
+    description: 'Client secret for auth token provider'
+    required: true
+  api-addr:
+    description: 'Kusari hosted GUAC tenant api endpoint'
+    required: true
+  token-url:
+    description: 'Url for auth token provider'
+    required: true
+    default: https://auth.dev.kusari.cloud/oauth2/token
 outputs:
   console_out:
-    description: 'raw console output from guacone command'
+    description: 'GUAC ingestion output'
 runs:
   using: 'docker'
   image: 'Dockerfile'

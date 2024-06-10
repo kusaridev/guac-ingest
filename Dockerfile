@@ -1,9 +1,2 @@
-# FROM cgr.dev/chainguard/go AS builder
-# COPY . /app
-# RUN cd /app && go build -o guac-github-action .
-
-# FROM cgr.dev/chainguard/glibc-dynamic
-# COPY --from=builder /app/guac-github-action /usr/bin/
-# ENTRYPOINT ["/usr/bin/guac-github-action"]
-
-FROM ghcr.io/kusaridev/kusari-uploader:latest
+#v0.7.2
+FROM ghcr.io/kusaridev/kusari-uploader@sha256:52bcbf878fe8fd8827b7a61185c3f6b58ff37016608406a900ba4646d25cee6e
