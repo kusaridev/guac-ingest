@@ -21,7 +21,7 @@ inputs:
   token-url:
     description: 'Url for auth token provider'
     required: true
-    default: https://auth.dev.kusari.cloud/oauth2/token
+    default: https://auth.us.kusari.cloud/oauth2/token
 outputs:
   console_out:
     description: 'GUAC ingestion output'
