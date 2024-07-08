@@ -24,15 +24,15 @@ jobs:
           ref: 'main'
           path: 'guac-data'
 
-      - name: ingest to guac
+      - name: GUAC Ingestion - Demo
         uses: ./
         continue-on-error: true
         with:
           files: ./guac-data/docs/spdx/spdx_vuln.json
           # files: ./guac-data/top-dh-sboms
-          client-id: ${{ secrets.GUAC_CLIENT_ID }}
-          client-secret: ${{ secrets.GUAC_CLIENT_SECRET }}
-          api-addr: https://ingesttest.api.dev.kusari.cloud
+          api-addr: https://demo.api.dev.kusari.cloud
+          client-id: ${{ secrets.KUSARI_CLIENT_ID_DEMO }}
+          client-secret: ${{ secrets.KUSARI_CLIENT_SECRET_DEMO }}
           token-url: https://auth.dev.kusari.cloud/oauth2/token
 
       - name: last step
