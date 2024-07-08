@@ -1,2 +1,2 @@
-#v0.7.2
-FROM ghcr.io/kusaridev/kusari-uploader@sha256:52bcbf878fe8fd8827b7a61185c3f6b58ff37016608406a900ba4646d25cee6e
+#v0.7.2 - multi-arch
+FROM ghcr.io/kusaridev/kusari-uploader@sha256:6da882fadbbffebbd33a996447d591f0b33fb2a72a47e6584bf5ea35f974250f
