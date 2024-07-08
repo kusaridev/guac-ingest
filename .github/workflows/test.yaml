@@ -33,7 +33,7 @@ jobs:
           client-id: ${{ secrets.GUAC_CLIENT_ID }}
           client-secret: ${{ secrets.GUAC_CLIENT_SECRET }}
           api-addr: https://ingesttest.api.dev.kusari.cloud
-          # token-url: https://auth.dev.kusari.cloud/oauth2/token
+          token-url: https://auth.dev.kusari.cloud/oauth2/token
 
       - name: last step
         shell: bash
